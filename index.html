@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Forge Fitness — train stronger, live better." />
+  <title>Forge Fitness | Train Strong. Live Better.</title>
+  <style>
+    :root {
+      --ink: #090b0d;
+      --card: #14181b;
+      --muted: #9ba5aa;
+      --white: #f8fbfa;
+      --lime: #c9ff3f;
+      --line: rgba(255,255,255,.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--white); background: var(--ink); font-family: Arial, Helvetica, sans-serif; overflow-x: hidden; }
+    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; background: radial-gradient(circle at 84% 12%, rgba(201,255,63,.15), transparent 25rem), radial-gradient(circle at 8% 72%, rgba(67,115,93,.17), transparent 24rem); }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1140px, calc(100% - 40px)); margin: auto; }
+    header { position: fixed; z-index: 10; inset: 0 0 auto; background: rgba(9,11,13,.78); border-bottom: 1px solid transparent; backdrop-filter: blur(14px); transition: .25s; }
+    header.scrolled { border-color: var(--line); }
+    .nav { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: -.06em; font-size: 1.35rem; }
+    .brand-mark { display: grid; place-items: center; height: 34px; width: 34px; color: var(--ink); background: var(--lime); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); font-size: 1rem; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: #d9dfdd; font-size: .9rem; font-weight: 700; }
+    .nav-links a:hover { color: var(--lime); }
+    .nav-cta, .button { display: inline-flex; align-items: center; justify-content: center; min-height: 47px; padding: 0 22px; border: 1px solid var(--lime); background: var(--lime); color: #111; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; font-size: .76rem; transition: transform .2s, background .2s; }
+    .nav-cta:hover, .button:hover { transform: translateY(-3px); }
+    .menu-button { display: none; border: 0; background: transparent; color: white; font-size: 1.55rem; cursor: pointer; }
+    .hero { position: relative; min-height: 790px; display: grid; align-items: center; padding: 150px 0 90px; isolation: isolate; }
+    .hero::after { content: ""; position: absolute; z-index: -1; right: -10vw; bottom: 0; width: min(65vw, 760px); height: 86%; opacity: .8; background: linear-gradient(135deg, transparent 12%, #252d25 12% 16%, transparent 16% 35%, #303a2e 35% 39%, transparent 39%), radial-gradient(ellipse at 56% 52%, #59644a 0 9%, #283026 26%, transparent 62%); clip-path: polygon(28% 0, 100% 0, 100% 100%, 0 100%, 16% 67%, 0 46%); filter: contrast(1.1); }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 20px; color: var(--lime); font-size: .78rem; font-weight: 900; text-transform: uppercase; letter-spacing: .13em; }
+    .eyebrow::before { content: ""; width: 30px; height: 2px; background: currentColor; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(3.6rem, 8vw, 7.4rem); line-height: .88; letter-spacing: -.075em; text-transform: uppercase; }
+    h1 em { color: var(--lime); font-style: normal; }
+    .hero-copy { width: min(465px, 100%); margin: 27px 0 31px; color: #c2cbca; font-size: 1.08rem; line-height: 1.65; }
+    .actions { display: flex; gap: 13px; flex-wrap: wrap; }
+    .button.secondary { color: var(--white); background: transparent; border-color: var(--line); }
+    .button.secondary:hover { background: #202625; }
+    .hero-meta { position: absolute; bottom: 36px; left: max(20px, calc((100% - 1140px)/2)); right: max(20px, calc((100% - 1140px)/2)); display: flex; justify-content: space-between; align-items: end; color: var(--muted); font-size: .78rem; font-weight: bold; text-transform: uppercase; letter-spacing: .08em; }
+    .scroll-line { width: 90px; height: 1px; margin-bottom: 5px; background: var(--line); }
+    .features { position: relative; z-index: 1; padding: 0 0 105px; }
+    .feature-grid { display: grid; grid-template-columns: 1.35fr 1fr 1fr 1fr; border: 1px solid var(--line); background: rgba(20,24,27,.78); }
+    .feature { min-height: 180px; padding: 28px; border-right: 1px solid var(--line); }
+    .feature:last-child { border: 0; }
+    .feature .num { color: var(--lime); font-size: 2.1rem; font-weight: 900; letter-spacing: -.07em; }
+    .feature h2 { margin: 10px 0 8px; font-size: 1rem; text-transform: uppercase; letter-spacing: .02em; }
+    .feature p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+    .intro { padding: 88px 0; border-top: 1px solid var(--line); }
+    .intro-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: start; }
+    .section-title { margin: 0; font-size: clamp(2.2rem, 4vw, 4.4rem); line-height: .95; letter-spacing: -.06em; text-transform: uppercase; }
+    .intro-text { color: #c2cbca; font-size: 1.14rem; line-height: 1.7; }
+    .intro-text strong { color: var(--lime); }
+    footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: .82rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 15px; }
+    @media (max-width: 780px) {
+      .nav-links { position: absolute; inset: 76px 0 auto; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 12px 20px 22px; background: #101315; border-bottom: 1px solid var(--line); }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 0; }
+      .nav-links .nav-cta { margin-top: 8px; }
+      .menu-button { display: block; }
+      .nav-cta { display: none; }
+      .nav-links .nav-cta { display: inline-flex; }
+      .hero { min-height: 700px; padding-top: 130px; }
+      .hero::after { width: 100%; height: 48%; right: -20%; opacity: .38; }
+      .hero-meta { bottom: 20px; }
+      .hero-meta span:first-child { display: none; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .feature:nth-child(2) { border-right: 0; }
+      .feature:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .intro-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 460px) { .container { width: min(100% - 30px, 1140px); } .feature { padding: 21px; } .actions { display: grid; } .button { width: 100%; } .footer-row { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header id="header"><nav class="nav container" aria-label="Main navigation">
+    <a class="brand" href="#home" aria-label="Forge Fitness home"><span class="brand-mark">F</span>FORGE</a>
+    <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks"><a href="#home">Home</a><a href="#training">Training</a><a href="#plans">Plans</a><a href="#community">Community</a><a class="nav-cta" href="#join">Join Now</a></div>
+    <a class="nav-cta" href="#join">Join Now</a>
+  </nav></header>
+
+  <main>
+    <section class="hero" id="home"><div class="container">
+      <p class="eyebrow">Built for your next level</p>
+      <h1>Earn your<br /><em>strong.</em></h1>
+      <p class="hero-copy">No shortcuts. No empty promises. Just expert coaching, powerful training spaces, and a community that refuses to settle.</p>
+      <div class="actions"><a class="button" id="join" href="mailto:hello@forgefitness.com?subject=Gym%20Membership%20Enquiry">Join Now <span>&nbsp;→</span></a><a class="button secondary" href="#plans">Explore Plans</a></div>
+    </div><div class="hero-meta"><span>Est. 2014 · Train with purpose</span><span class="scroll-line"></span><span>Scroll to discover ↓</span></div></section>
+
+    <section class="features" id="training"><div class="container"><div class="feature-grid">
+      <article class="feature"><div class="num">01</div><h2>Elite Equipment</h2><p>Purpose-built strength and conditioning equipment with room to move.</p></article>
+      <article class="feature"><div class="num">02</div><h2>Expert Coaches</h2><p>Guidance that meets you where you are—and takes you further.</p></article>
+      <article class="feature"><div class="num">03</div><h2>Open 24/7</h2><p>Your schedule. Your session. Train whenever you are ready.</p></article>
+      <article class="feature"><div class="num">04</div><h2>Real Community</h2><p>Surround yourself with people who show up and push forward.</p></article>
+    </div></div></section>
+
+    <section class="intro" id="plans"><div class="container intro-grid"><p class="eyebrow">The Forge Method</p><div><h2 class="section-title">More than a gym.<br />A standard.</h2><p class="intro-text">Every membership gives you the tools to <strong>build strength, confidence, and momentum.</strong> Start with a plan that works for your life, then make it yours.</p><a class="button secondary" href="mailto:hello@forgefitness.com?subject=Membership%20Plans">See Membership Plans</a></div></div></section>
+  </main>
+  <footer id="community"><div class="container footer-row"><span>© 2026 Forge Fitness. Train Strong. Live Better.</span><span>hello@forgefitness.com · Your City</span></div></footer>
+  <script>
+    const button = document.getElementById('menuButton');
+    const links = document.getElementById('navLinks');
+    button.addEventListener('click', () => { const open = links.classList.toggle('open'); button.setAttribute('aria-expanded', open); button.textContent = open ? '×' : '☰'; });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); button.setAttribute('aria-expanded', 'false'); button.textContent = '☰'; }));
+    addEventListener('scroll', () => document.getElementById('header').classList.toggle('scrolled', scrollY > 15));
+  </script>
+</body>
+</html>
